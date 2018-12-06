@@ -40,36 +40,22 @@ print("Comprobacion1:		",arbol.score(X_test, Y_test))
 print("Comprobacion2:		",arbol.score(X_train, Y_train))
 
 """__________________"""
-export_graphviz(arbol,out_file='arbol.dot',class_names=iris.target_names,
+G = export_graphviz(arbol,out_file='arbol.dot',class_names=iris.target_names,
 	feature_names=iris.feature_names,impurity=False,filled=True)
 
 with open('arbol.dot') as f:
 	dot_graph = f.read()
-# print(dot_graph)
 
-# import pydot 
-# dotfile = StringIO() 
-# export_graphviz(dtreg, out_file=dotfile) 
-# pydot.graph_from_dot_data(dotfile.getvalue()).write_png("arbol.png") 
+# graph=graphviz.Source(dot_graph)
+# graphviz.Source(dot_graph).view()
+# graph.view()
+graphviz.Source(dot_graph).render ('arbol', view=True, format='png')
+# graph.render ('arbol', view=True, format='png')
 
-# print(dot_graph)
-graph=graphviz.Source(dot_graph)
-graph.render ('arbol', view=True, format='png')
-# Digraph(graph)
-# graph.format = 'png' 
-# graph.render('arbol',view=True)
-# print('Hola')
-# graph = graphviz.Source(export_graphviz(arbol, out_file=None, feature_names=iris.feature_names)) 
-# print('Hola')
-# png_bytes = graph.pipe(format='png') 
-# print('Hola')
-# with open('dtree_pipe.png','w') as f: 
-#     f.write(png_bytes) 
-
-# from IPython.display import Image 
-# Image(png_bytes) 
-
-# system("dot -Tpng .dot -o /arbol.png")
-# graphviz.render()
-graphviz.render('dot','png','/home/inggarces/Documentos/Python_Dev/Machine_Learning/arbol.dot')
-
+caract = iris.data.shape[1]
+print(caract)
+plt.bar(range(caract), arbol.feature_importances_)
+plt.xticks(np.arange(caract), iris.feature_names)
+plt.xlabel("importancia de las caracteristicas")
+plt.ylabel("Caracteristica")
+plt.show()

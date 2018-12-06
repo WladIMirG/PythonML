@@ -8,7 +8,7 @@ from sklearn.model_selection import train_test_split
 #Graficar el arbol de desiciones que generamos
 from sklearn.tree import export_graphviz
 import graphviz
-from graphviz import Digraph
+from graphviz import Digraph, Graph
 import numpy as np 
 print("HOLA")
 import matplotlib.pyplot as plt 
@@ -46,11 +46,14 @@ G = export_graphviz(arbol,out_file='arbol.dot',class_names=iris.target_names,
 with open('arbol.dot') as f:
 	dot_graph = f.read()
 
-# graph=graphviz.Source(dot_graph)
-# graphviz.Source(dot_graph).view()
-# graph.view()
 graphviz.Source(dot_graph).render ('arbol', view=True, format='png')
+# graphviz.Source(dot_graph).view()
+# graph=graphviz.Source(dot_graph)
 # graph.render ('arbol', view=True, format='png')
+# graph.view()
+
+# h = Graph() ('g', filename='new.dot', engine='dot')
+# h.view()
 
 caract = iris.data.shape[1]
 print(caract)

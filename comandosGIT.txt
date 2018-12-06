@@ -1,0 +1,5 @@
+git init						#Iniciar un nuevo repositorio
+git status						#Mira el estado de los archivos
+git add "Archivos a adherir"	#Adhiere/prepara los archivos para enviarlos al repositorio
+git commit						#Prepara los archivos para enviarlos
+git log							#Ver todos los commit creados

@@ -13,7 +13,7 @@ import numpy as np
 print("HOLA")
 import matplotlib.pyplot as plt 
 from os import system
-# os.environ["PATH"] += os.pathsep + 'c:/Program Files (x86)/Graphviz2.38/bin/'﻿
+
 
 
 
@@ -52,8 +52,12 @@ graphviz.Source(dot_graph).render ('arbol', view=True, format='png')
 # graph.render ('arbol', view=True, format='png')
 # graph.view()
 
-# h = Graph() ('g', filename='new.dot', engine='dot')
-# h.view()
+# import pydot 
+# import StringIO
+
+# dotfile = StringIO() 
+# tree.export_graphviz(dtreg, out_file=dotfile) 
+# pydot.graph_from_dot_data(dotfile.getvalue()).write_png("dtree2.png") 
 
 caract = iris.data.shape[1]
 print(caract)

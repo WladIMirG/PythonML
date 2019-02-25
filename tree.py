@@ -1,5 +1,5 @@
 #se importa el clasificador de arbol
-from sklearn.tree import DecisionTreeClassifier
+from sklearn.tree import ExtraTreeClassifier
 #Se importan los datasets que se van a trabajar
 from sklearn.datasets import load_breast_cancer, load_iris
 #Se importa el divisor de datos para sacr los datos de entrenamiento y de test
@@ -19,6 +19,7 @@ from os import system
 
 """__________________"""
 iris = load_iris()
+iris = load_breast_cancer()
 print(type(iris))
 print("keys:			",iris.keys())
 print("data:			",iris["data"])
@@ -34,7 +35,7 @@ print("Y_train:			", Y_train.shape)
 print("Y_test:				", Y_test.shape)
 
 """__________________"""
-arbol = DecisionTreeClassifier(max_depth=5)
+arbol = ExtraTreeClassifier(max_depth=3)
 print("Entreno:			",arbol.fit(X_train, Y_train))
 print("Comprobacion1:		",arbol.score(X_test, Y_test))
 print("Comprobacion2:		",arbol.score(X_train, Y_train))
@@ -46,7 +47,7 @@ G = export_graphviz(arbol,out_file='arbol.dot',class_names=iris.target_names,
 with open('arbol.dot') as f:
 	dot_graph = f.read()
 
-graphviz.Source(dot_graph).render ('arbol', view=True, format='png')
+graphviz.Source(dot_graph).render('arbol', view=False, format='png')
 # graphviz.Source(dot_graph).view()
 # graph=graphviz.Source(dot_graph)
 # graph.render ('arbol', view=True, format='png')
@@ -67,9 +68,10 @@ plot_step = 0.02
 
 for pairidx, pair in enumerate([[0, 1], [0, 2], [0, 3],
 								[1, 2], [1, 3], [2, 3]]):
+	print (pair, pairidx)
 	X = iris.data[:, pair]
 	Y = iris.target
-	clf = DecisionTreeClassifier(max_depth = 3).fit(X, Y)
+	clf = ExtraTreeClassifier(max_depth = 3).fit(X, Y)
 
 	plt.subplot(2,3, pairidx + 1)
 
@@ -87,8 +89,10 @@ for pairidx, pair in enumerate([[0, 1], [0, 2], [0, 3],
 
 	for i, color in zip(range(n_classes), plot_colors):
 		idx = np.where(Y == i)
-		plt.scatter(X[idx, 0], X[idx, 1], c=color, label=iris.target_names[i],
-					cmap=plt.cm.Paired)
+		print (i)
+		# print (idx)
+		# plt.scatter(X[idx, 0], X[idx, 1], c=color, label=iris.target_names[i],
+		# 			cmap=plt.cm.Paired)
 	plt.axis("tight")
 plt.suptitle("Ejemplos de clasificador de arboles")
 plt.legend()
